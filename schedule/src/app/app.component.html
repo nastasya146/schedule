@@ -1,9 +1,10 @@
-<h1>
+<h1 class="mat-h1 mat-headline">
   {{title}}
 </h1>
-
-<button routerLink="/user">User</button>
-<button routerLink="/manager">Manager</button>
-<button routerLink="">Home</button>
+<div class="button-row">
+  <button mat-raised-button class="mat-raised-button mat-primary" routerLink="/user">User</button>
+  <button mat-raised-button class="mat-raised-button mat-accent" routerLink="/manager">Manager</button>
+  <button mat-raised-button class="mat-raised-button mat-warn" routerLink="">Home</button>
+</div>
 
 <router-outlet></router-outlet>
