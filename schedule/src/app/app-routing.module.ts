@@ -7,6 +7,10 @@ const routes: Routes = [
         loadChildren: './user/user.module#UserModule'
     },
     {
+        path: 'manager',
+        loadChildren: './manager/manager.module#ManagerModule'
+    },
+    {
         path: '',
         redirectTo: '',
         pathMatch: 'full'
