@@ -6,13 +6,23 @@ import { ScheduleState } from './model/schedule-state';
   providedIn: 'root'
 })
 export class SharedService {
+  url: string = 'api';
+  userId: string;
 
   constructor(private http: HttpClient) { }
 
-  public getWorkShifts() {
+  public setUserId() {
+    this.getUserId().subscribe(res => this.userId = res);
+  }
 
+  private getUserId() {
+    const url = this.url + '/user';
+    return this.http.get<string>(url);
+  }
+
+  public getWorkShifts() {
   }
   
-  public setScheduleState(state: ScheduleState) {
+  public setScheduleState(id: string, state: ScheduleState) {
   }
 }

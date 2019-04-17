@@ -4,20 +4,33 @@
             <mat-panel-title>
                 {{ user.name }}
             </mat-panel-title>
-            <mat-panel-description>
-                Schedule state
-            </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-            <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let day"> {{ day.date }} </td>
-            </ng-container>
-            <ng-container matColumnDef="shift">
-                <th mat-header-cell *matHeaderCellDef> Work shift </th>
-                <td mat-cell *matCellDef="let day"> {{ day.shiftString }} </td>
-            </ng-container>
-            <button mat-raised-button class="mat-raised-button mat-primary" (click)="approve(user.id)"> Approve </button>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let schedule of user.schedules">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ schedule.days[0].from }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{ schedule.state }}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <div *ngFor="let day of schedule.days">
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date </th>
+                                <td mat-cell *matCellDef="let day"> {{ day.date }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="shift">
+                                <th mat-header-cell *matHeaderCellDef> Work shift </th>
+                                <td mat-cell *matCellDef="let day"> {{ day.shiftString }} </td>
+                            </ng-container>
+                        </div>
+                        <button mat-raised-button class="mat-raised-button mat-primary" (click)="approve(schedule.id)"> Approve </button>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
         </ng-template>
     </mat-expansion-panel>
 </mat-accordion>
