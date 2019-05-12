@@ -3,6 +3,7 @@ import { ManagerService } from '../manager.service';
 import { User } from 'src/app/shared/model/user';
 import { ScheduleState } from 'src/app/shared/model/schedule-state';
 import { SharedService } from 'src/app/shared/shared.service';
+import { UserRole } from 'src/app/shared/model/user-role';
 
 @Component({
     selector: 'app-approval',
@@ -15,6 +16,7 @@ export class ApprovalComponent implements OnInit {
         {
             id: '1',
             name: "User1",
+            role: UserRole.Manager,
             schedules: [
                 {
                     id: '11',
@@ -44,6 +46,7 @@ export class ApprovalComponent implements OnInit {
         {
             id: '2',
             name: "User2",
+            role: UserRole.User,
             schedules: []
         }
     ]
