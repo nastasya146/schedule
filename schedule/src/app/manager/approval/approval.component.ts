@@ -4,6 +4,7 @@ import { User } from 'src/app/shared/model/user';
 import { ScheduleState } from 'src/app/shared/model/schedule-state';
 import { SharedService } from 'src/app/shared/shared.service';
 import { UserRole } from 'src/app/shared/model/user-role';
+import { Shift } from 'src/app/shared/model/shift';
 
 @Component({
     selector: 'app-approval',
@@ -25,19 +26,11 @@ export class ApprovalComponent implements OnInit {
                     days: [
                         {
                             date: new Date(2019, 3, 21),
-                            shift: {
-                                start: 600,
-                                finish: 1800,
-                                breakTime: 30
-                            }
+                            shift: new Shift("1", 600, 1800, 30)
                         },
                         {
                             date: new Date(2019, 3, 22),
-                            shift: {
-                                start: 570,
-                                finish: 1800,
-                                breakTime: 60
-                            }
+                            shift: new Shift("1", 600, 1800, 30)
                         }
                     ]
                 }
@@ -54,13 +47,17 @@ export class ApprovalComponent implements OnInit {
         private sharedService: SharedService) { }
 
     ngOnInit() {
-        this.sharedService.setUserId();
-        //this.users = this.managerService.getUsers()
-        //.subscribe();
+        this.managerService.getUsers()
+        .subscribe(u => this.users = u);
     }
 
     approve(id: string) {
-        console.log('approved ', id);
+        this.sharedService.setScheduleState(id, ScheduleState.Approved)
+        .subscribe();
     }
 
+    return(id: string) {
+        this.sharedService.setScheduleState(id, ScheduleState.Returned)
+        .subscribe();
+    }
 }

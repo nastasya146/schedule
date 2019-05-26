@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ScheduleState } from './model/schedule-state';
 import { User } from './model/user';
 
@@ -9,6 +9,11 @@ import { User } from './model/user';
 export class SharedService {
   url: string = 'api';
   userId: string;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+};
 
   constructor(private http: HttpClient) { }
 
@@ -25,5 +30,8 @@ export class SharedService {
   }
   
   public setScheduleState(id: string, state: ScheduleState) {
+    const url = this.url + '/schedule';
+    return this.http.put(url, {id: id, state: state }, this.httpOptions);
+
   }
 }

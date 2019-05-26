@@ -27,7 +27,10 @@
                                 <td mat-cell *matCellDef="let day"> {{ day.shiftString }} </td>
                             </ng-container>
                         </div>
-                        <button mat-raised-button class="mat-raised-button mat-primary" (click)="approve(schedule.id)"> Approve </button>
+                        <div class="button-row">
+                            <button mat-raised-button class="mat-raised-button mat-primary" (click)="approve(schedule.id)"> Approve </button>
+                            <button mat-raised-button class="mat-raised-button mat-accent" (click)="return(schedule.id)"> Return </button>
+                        </div>
                     </ng-template>
                 </mat-expansion-panel>
             </mat-accordion>

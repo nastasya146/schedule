@@ -8,13 +8,17 @@ import { UserService } from '../user.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  schedules: Array<Schedule>;
-  constructor(private userService: UserService) { }
+    schedules: Array<Schedule>;
+    constructor(private userService: UserService) { }
 
-  ngOnInit() {
-    this.userService.getSchedules().subscribe(res => {
-      this.schedules = res;
-    })
-  }
+    ngOnInit() {
+        this.userService.getSchedules().subscribe(res => {
+        this.schedules = res;
+        });
+    }
 
+    send(schedule: Schedule) {
+        this.userService.send(schedule)
+        .subscribe();
+    }
 }

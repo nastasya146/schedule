@@ -1,3 +1,26 @@
-<p>
-  create-work-schedule works!
-</p>
+<h1 class="mat-h1 mat-headline">
+    Schedule
+</h1>
+<mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+        (dateInput)="dateChange($event)" (dateChange)="dateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<button mat-raised-button class="mat-raised-button mat-primary margin-left-15" (click)="addDay()">Add day</button>
+<mat-list>
+    <h3 matSubheader>Days</h3>
+    <mat-list-item *ngFor="let day of days">
+       <mat-icon matListIcon></mat-icon>
+       <h4 matLine>{{ day.date }}</h4>
+       <mat-form-field>
+        <mat-label>Choose shift</mat-label>
+        <mat-select [(ngModel)]="day.shift" name="selectedShift">
+          <mat-option *ngFor="let shift of shifts" [value]="shift.id">
+            {{ shift.getDisplayText() }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-list-item>
+ </mat-list>
+ <button  *ngIf="days.length > 0" mat-raised-button class="mat-raised-button mat-primary margin-left-15" (click)="send()">Send to manager</button>
