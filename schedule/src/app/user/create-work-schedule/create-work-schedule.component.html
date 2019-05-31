@@ -1,6 +1,3 @@
-<h1 class="mat-h1 mat-headline">
-    Schedule
-</h1>
 <mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Choose a date"
         (dateInput)="dateChange($event)" (dateChange)="dateChange($event)">
@@ -12,12 +9,12 @@
     <h3 matSubheader>Days</h3>
     <mat-list-item *ngFor="let day of days">
        <mat-icon matListIcon></mat-icon>
-       <h4 matLine>{{ day.date }}</h4>
+       <h4 matLine>{{ day.date.format("DD.MM.YYYY") + ( day.holiday ? ' (' + day.holiday +')' : '') }}</h4>
        <mat-form-field>
         <mat-label>Choose shift</mat-label>
-        <mat-select [(ngModel)]="day.shift" name="selectedShift">
-          <mat-option *ngFor="let shift of shifts" [value]="shift.id">
-            {{ shift.getDisplayText() }}
+        <mat-select (selectionChange)="onShiftSelectionChange($event, day)" name="selectedShift" placeholder="sharedService.getDisplayText(day.shift)">
+          <mat-option *ngFor="let shift of shifts" [value]="shift">
+            {{ sharedService.getDisplayText(shift) }}
           </mat-option>
         </mat-select>
       </mat-form-field>

@@ -1,0 +1,10 @@
+<mat-form-field class="margin-top-15">
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" (dateInput)="dateChange($event)"
+        (dateChange)="dateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="margin-left-15">
+    <input matInput placeholder="Choose a time" type="time">
+</mat-form-field>
+<button mat-raised-button class="mat-raised-button mat-primary margin-left-15" (click)="send()">Send</button>

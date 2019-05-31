@@ -1,1 +1,13 @@
-<app-create-work-schedule (emitSend)="send($event, schedule)"></app-create-work-schedule>
+<mat-tab-group animationDuration="0ms" mat-align-tabs="start">
+    <mat-tab label="Schedule">
+        <ng-template matTabContent>
+            <app-create-work-schedule (emitSend)="send($event, schedule)">
+            </app-create-work-schedule>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Attendance">
+        <ng-template matTabContent>
+            <app-attendance></app-attendance>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

@@ -4,9 +4,11 @@ import { UserRoutingModule } from './user-routing.module';
 import { MainComponent } from './main/main.component';
 import { CreateWorkScheduleComponent } from './create-work-schedule/create-work-schedule.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatNativeDateModule, MatInputModule, MatIconModule, MatListModule, MatSelectModule, MAT_DATE_LOCALE, MAT_DATE_FORMATS, DateAdapter } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { AttendanceComponent } from './attendance/attendance.component';
 
 @NgModule({
     imports: [
@@ -17,11 +19,12 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-mo
         MatIconModule,
         MatListModule,
         MatSelectModule,
+        MatTabsModule,
         FormsModule,   
         ReactiveFormsModule,
         UserRoutingModule
     ],
-    declarations: [MainComponent, CreateWorkScheduleComponent],
+    declarations: [MainComponent, CreateWorkScheduleComponent, AttendanceComponent],
     providers: [
         {provide: MAT_DATE_LOCALE, useValue: 'ru-Ru'},
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

@@ -1,1 +1,12 @@
-<app-approval></app-approval>
+<mat-tab-group animationDuration="0ms" mat-align-tabs="start">
+    <mat-tab label="Approval">
+        <ng-template matTabContent>
+            <app-approval></app-approval>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Work shifts">
+        <ng-template matTabContent>
+            <app-work-shift></app-work-shift>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

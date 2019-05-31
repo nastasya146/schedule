@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel *ngFor="let user of users" (opened)="onPanelOpened(user)">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{ user.name }}
@@ -7,29 +7,34 @@
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
             <mat-accordion>
-                <mat-expansion-panel *ngFor="let schedule of user.schedules">
+                <mat-expansion-panel *ngFor="let schedule of user.schedules; let scheduleIndex = index;">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            {{ schedule.days[0].from }}
+                             {{ 'Schedule ' + (scheduleIndex + 1) }}
                         </mat-panel-title>
                         <mat-panel-description>
-                            {{ schedule.state }}
+                            {{ stateToString(schedule) }}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <ng-template matExpansionPanelContent>
-                        <div *ngFor="let day of schedule.days">
+                        <table mat-table [dataSource]="schedule.days" class="mat-elevation-z8">
                             <ng-container matColumnDef="date">
                                 <th mat-header-cell *matHeaderCellDef> Date </th>
                                 <td mat-cell *matCellDef="let day"> {{ day.date }} </td>
                             </ng-container>
                             <ng-container matColumnDef="shift">
                                 <th mat-header-cell *matHeaderCellDef> Work shift </th>
-                                <td mat-cell *matCellDef="let day"> {{ day.shiftString }} </td>
+                                <td mat-cell *matCellDef="let day"> {{ shiftToString(day.shift) }} </td>
                             </ng-container>
-                        </div>
+                            
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
                         <div class="button-row">
-                            <button mat-raised-button class="mat-raised-button mat-primary" (click)="approve(schedule.id)"> Approve </button>
-                            <button mat-raised-button class="mat-raised-button mat-accent" (click)="return(schedule.id)"> Return </button>
+                            <button mat-raised-button class="mat-raised-button mat-primary"
+                                (click)="approve(schedule)"> Approve </button>
+                            <button mat-raised-button class="mat-raised-button mat-accent"
+                                (click)="return(schedule)"> Return </button>
                         </div>
                     </ng-template>
                 </mat-expansion-panel>
